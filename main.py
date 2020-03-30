@@ -38,7 +38,7 @@ def uploadGyazo(file_name, imagedata, content_type, title, url, desc, timestamp)
 
     # metadata
     metadata = {
-        'app': "photo-gyazo",
+        'app': "p-gyazo",
         'title': title,
         'url': url,
         'desc': desc
