@@ -1,0 +1,2 @@
+requests
+pdf2image

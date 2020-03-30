@@ -63,7 +63,10 @@ from pathlib import Path
 import subprocess
 import os.path as osp
 def getPdfInfo(file_path):
-    cmd = 'poppler/bin/pdfinfo.exe'
+    if 'Darwin' in platform.system():
+        cmd = 'pdfinfo'
+    elif 'Windows' in platform.system() or 'CYGWIN' in platform.system():
+        cmd = 'pdfinfo.exe'
     if not osp.exists(cmd):
         raise RuntimeError('System command not found: %s' % cmd)
 
