@@ -133,16 +133,21 @@ def uploadPdfFile(dir_path, file_path):
 
 def uploadPdfFileFromDir(dir_path, recursive):
     dir_path = os.path.abspath(dir_path)
-    file_and_dir = os.listdir(dir_path)
-    for file_or_dir in file_and_dir:
+    try:
+        file_and_dir = os.listdir(dir_path)
+        for file_or_dir in file_and_dir:
+            isFile = os.path.isfile(os.path.join(dir_path, file_or_dir))
+            if isFile and file_or_dir.endswith(".pdf"):
+                if file_or_dir.startswith("."):
+                    continue
+                uploadPdfFile(dir_path, file_or_dir)
+            else:
+                if recursive:
+                    uploadPdfFileFromDir(os.path.join(dir_path, file_or_dir), recursive)
+    except NotADirectoryError:
         isFile = os.path.isfile(os.path.join(dir_path, file_or_dir))
         if isFile and file_or_dir.endswith(".pdf"):
-            if file_or_dir.startswith("."):
-                continue
             uploadPdfFile(dir_path, file_or_dir)
-        else:
-            if recursive:
-                uploadPdfFileFromDir(os.path.join(dir_path, file_or_dir), recursive)
 
 import sys
 targetMethod = None
