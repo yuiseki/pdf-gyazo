@@ -146,8 +146,8 @@ def uploadPdfFileFromDir(dir_path, recursive):
                     uploadPdfFileFromDir(os.path.join(dir_path, file_or_dir), recursive)
     except NotADirectoryError:
         isFile = os.path.isfile(dir_path)
-        if isFile and file_or_dir.endswith(".pdf"):
-            uploadPdfFile(dir_path, file_or_dir)
+        if isFile and dir_path.endswith(".pdf"):
+            uploadPdfFile("", dir_path)
 
 import sys
 targetMethod = None
