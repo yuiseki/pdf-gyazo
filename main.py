@@ -61,13 +61,14 @@ from pathlib import Path
 
 
 import subprocess
+from shutil import which
 import os.path as osp
 def getPdfInfo(file_path):
     if 'Darwin' in platform.system():
         cmd = 'pdfinfo'
     elif 'Windows' in platform.system() or 'CYGWIN' in platform.system():
         cmd = 'pdfinfo.exe'
-    if not osp.exists(cmd):
+    if which(cmd) is None:
         raise RuntimeError('System command not found: %s' % cmd)
 
     if not osp.exists(file_path):
