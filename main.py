@@ -108,10 +108,13 @@ def uploadPdfFile(dir_path, file_path):
         title = pdf_info.get("Title", "")
         print(title)
         datestr = pdf_info.get("CreationDate", " ").split(" ")[0]
+        print(datestr)
         try:
             datetimeobj = datetime.datetime.strptime(datestr, '%m/%d/%y')
-        except ValueError:
-            return
+        except ValueError as e:
+             print(e)
+             datefloat = os.stat(pdf_path).st_ctime
+             datetimeobj = datetime.datetime.fromtimestamp(datefloat)
         timestamp = datetimeobj.timestamp()
     except subprocess.CalledProcessError:
         print("fuck")
