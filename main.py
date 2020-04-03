@@ -120,7 +120,7 @@ def uploadPdfFile(dir_path, file_path):
         print("fuck")
 
     try:
-        if title is "":
+        if title == "":
             title = "no title"
         desc = "#pdf-gyazo #{} #{}".format(title.replace(" ", "_").replace(".", ""), file_name.replace(" ", "_"))
         print(desc)
